@@ -85,8 +85,8 @@ public class Sorting {
     }
 
     public static void swap(int indexOne, int indexTwo, int[] array) {
-        array[indexOne] = array[indexOne] + array[indexTwo];
-        array[indexTwo] = array[indexOne] - array[indexTwo];
-        array[indexOne] = array[indexOne] - array[indexTwo];
+        int tmp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = tmp;
     }
 }
