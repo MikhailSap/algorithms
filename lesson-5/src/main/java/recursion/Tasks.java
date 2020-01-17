@@ -3,7 +3,7 @@ package recursion;
 public class Tasks {
     private static int number;
 
-    private static int CAPACITY_OF_BAG = 15;
+    private static int CAPACITY_OF_BAG = 20;
     private static int maxV;
     private static Item[] items;
 
@@ -19,11 +19,11 @@ public class Tasks {
                 new Item(12, 4),
                 new Item(2, 2),
                 new Item(1, 2),
-                new Item(1, 1),
+                new Item(16, 27),
                 new Item(4, 10)
         };
 
-        System.out.println(packBag(-1, 0, 0));
+        System.out.println(packBag(items.length, 0, 0));
 
     }
 
@@ -44,15 +44,15 @@ public class Tasks {
     public static int packBag(int i, int currentW, int currentV) {
         int with;
         int without;
-        if (i == items.length - 1) {
+        if (i == 0) {
             if (currentW <= CAPACITY_OF_BAG) {
                 return currentV;
             } else {
                 return currentV = 0;
             }
         } else {
-           with = packBag(i + 1, currentW + items[i+1].weight, currentV + items[i+1].value);
-           without = packBag(i + 1, currentW, currentV);
+           with = packBag(i - 1, currentW + items[i-1].weight, currentV + items[i-1].value);
+           without = packBag(i - 1, currentW, currentV);
         }
 
         if (with == 0 && without == 0) {
