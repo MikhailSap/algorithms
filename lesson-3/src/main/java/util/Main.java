@@ -20,7 +20,7 @@ public class Main {
             sb.append(myStack.pop());
         }
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
 
     }
 }
