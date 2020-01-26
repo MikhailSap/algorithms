@@ -52,14 +52,7 @@ public class MyHashMap<Key extends Comparable<Key>, Value> {
 
     public Value get(Key key) {
         checkKey(key);
-        index = hash(key);
-        entry = null;
-        for (Entry e : table[index]) {
-            if (key.equals(e.key)) {
-                entry = e;
-                break;
-            }
-        }
+        entry = search(key);
         if (entry == null) {
             throw new NoSuchElementException();
         } else {
@@ -69,14 +62,7 @@ public class MyHashMap<Key extends Comparable<Key>, Value> {
 
     public boolean remove(Key key) {
         checkKey(key);
-        index = hash(key);
-        entry = null;
-        for (Entry e : table[index]) {
-            if (key.equals(e.key)) {
-                entry = e;
-                break;
-            }
-        }
+        entry = search(key);
         if (entry == null) {
             throw new NoSuchElementException();
         } else {
@@ -87,6 +73,8 @@ public class MyHashMap<Key extends Comparable<Key>, Value> {
 
     public boolean contains(Key key) {
         index = hash(key);
+        if (table[index] == null)
+            return false;
         return table[index].contains(key);
     }
 
@@ -101,6 +89,19 @@ public class MyHashMap<Key extends Comparable<Key>, Value> {
                 isEmpty = false;
         }
         return isEmpty;
+    }
+
+    private Entry search(Key key) {
+        index = hash(key);
+        if (table[index] == null) {
+            throw new NoSuchElementException();
+        }
+        for (Entry e : table[index]) {
+            if (key.equals(e.key)) {
+                return e;
+            }
+        }
+        return null;
     }
 
     private void setLoadFactor(int depth) {
